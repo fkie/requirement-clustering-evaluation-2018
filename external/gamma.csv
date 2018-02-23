@@ -1,0 +1,84 @@
+ClusterAlgorithm;DistanceFunction;Used Fields;Tfidf;StopWords;Lemmatized;Synonyms;GermaNetFunction;Word2VecAdd;Word2VecAverage;F1WeightedAvg;F1WeightedStd;CohesionAvg;CohesionStd;SeperationAvg;SeperationStd;SilhouetteAvg;SilhouetteStd;RuntimeAvg(ms)
+ClusterART;Not needed;7;true;true;true;false;false;false;false;0.37470000000000003;0.0;2.5075000000000003;0.0;4.0801;0.0;0.2695;0.0;2280.66
+ClusterART;Not needed;7;true;true;true;false;true;false;false;0.35800000000000004;0.0;72.4175;0.0;42.0858;0.0;0.1288;0.0;1003.98
+ClusterART;Not needed;7;true;true;true;true;false;false;false;0.4662;0.0;2.4233000000000002;0.0;4.1645;0.0;0.2436;0.0;2631.93
+ClusterART;Not needed;7;true;true;true;true;true;false;false;0.3458;0.0;54.7518;0.0;36.5813;0.0;0.2155;0.0;1154.95
+FuzzyCMeans1720;CosineDistance;7;true;true;true;false;false;false;false;0.4353;0.0359;1.9357000000000002;0.3256;1.8334000000000001;0.6354000000000001;0.1041;0.0463;71.76
+FuzzyCMeans1720;CosineDistance;7;true;true;true;false;false;false;true;0.3048;0.0386;6.197500000000001;0.1222;6.8886;0.18860000000000002;0.0339;0.015000000000000001;17.5
+FuzzyCMeans1720;CosineDistance;7;true;true;true;false;false;true;false;0.29200000000000004;0.0359;73.3323;2.1122;80.5333;2.9411;-0.0193;0.0218;15.53
+FuzzyCMeans1720;CosineDistance;7;true;true;true;false;true;false;false;0.2581;0.026600000000000002;40.1342;4.1023000000000005;68.9247;4.5426;-0.0945;0.0485;60.59
+FuzzyCMeans1720;CosineDistance;7;true;true;true;false;true;false;true;0.28090000000000004;0.033800000000000004;6.5252;0.6325000000000001;10.2992;0.6028;-0.3007;0.0685;10.27
+FuzzyCMeans1720;CosineDistance;7;true;true;true;false;true;true;false;0.2805;0.0341;49005.9988;5565.447;72388.3676;5379.177900000001;-0.33180000000000004;0.0684;7.93
+FuzzyCMeans1720;CosineDistance;7;true;true;true;true;false;false;false;0.41700000000000004;0.0309;2.1055;0.2851;2.2325;0.6181;0.0955;0.034;62.96
+FuzzyCMeans1720;CosineDistance;7;true;true;true;true;false;false;true;0.28090000000000004;0.0334;5.904800000000001;0.12250000000000001;6.453200000000001;0.169;0.008400000000000001;0.0176;16.67
+FuzzyCMeans1720;CosineDistance;7;true;true;true;true;false;true;false;0.2712;0.0318;70.9591;1.8998000000000002;76.7222;2.3253;-0.0269;0.0211;16.72
+FuzzyCMeans1720;CosineDistance;7;true;true;true;true;true;false;false;0.258;0.0347;30.672700000000003;3.0028;59.0349;3.7947;-0.047900000000000005;0.0483;62.09
+FuzzyCMeans1720;CosineDistance;7;true;true;true;true;true;false;true;0.2781;0.0367;4.680000000000001;0.49200000000000005;8.070400000000001;0.6797000000000001;-0.26;0.0601;8.62
+FuzzyCMeans1720;CosineDistance;7;true;true;true;true;true;true;false;0.2775;0.0366;27538.1928;3423.8672;46939.5228;5339.6314;-0.2904;0.0673;8.86
+FuzzyCMeans1720;EuclideanDistance;7;true;true;true;false;false;false;false;0.43520000000000003;0.027800000000000002;0.7012;0.2149;0.18150000000000002;0.13440000000000002;0.0422;0.0257;93.74
+FuzzyCMeans1720;EuclideanDistance;7;true;true;true;false;false;false;true;0.3548;0.0106;1.4898;0.29000000000000004;0.747;0.321;0.0223;0.0238;42.22
+FuzzyCMeans1720;EuclideanDistance;7;true;true;true;false;false;true;false;0.25520000000000004;0.0;9.5906;0.0;0.6703;0.0;0.0179;0.0;104.11
+FuzzyCMeans1720;EuclideanDistance;7;true;true;true;false;true;false;false;0.20470000000000002;0.0109;15.1765;0.9997;37.5563;5.7667;0.26030000000000003;0.054400000000000004;1405.29
+FuzzyCMeans1720;EuclideanDistance;7;true;true;true;false;true;false;true;0.2026;0.010400000000000001;1.1205;0.057600000000000005;11.2207;0.5781000000000001;0.43910000000000005;0.0636;162.27
+FuzzyCMeans1720;EuclideanDistance;7;true;true;true;false;true;true;false;0.1902;0.0066;9746.2822;384.51820000000004;112104.7718;6210.383900000001;0.6555000000000001;0.042800000000000005;157.37
+FuzzyCMeans1720;EuclideanDistance;7;true;true;true;true;false;false;false;0.4111;0.022000000000000002;0.5803;0.1408;0.1346;0.07640000000000001;0.014700000000000001;0.019;94.98
+FuzzyCMeans1720;EuclideanDistance;7;true;true;true;true;false;false;true;0.33430000000000004;0.0097;1.3097;0.2869;0.6559;0.328;0.0297;0.0256;41.11
+FuzzyCMeans1720;EuclideanDistance;7;true;true;true;true;false;true;false;0.2561;0.0;9.3114;0.0;0.655;0.0;0.0184;0.0;90.84
+FuzzyCMeans1720;EuclideanDistance;7;true;true;true;true;true;false;false;0.2139;0.006200000000000001;10.8819;0.7075;19.9218;4.532;0.19140000000000001;0.0451;1372.11
+FuzzyCMeans1720;EuclideanDistance;7;true;true;true;true;true;false;true;0.1968;0.0076;0.9666;0.035500000000000004;9.0693;0.7019000000000001;0.43860000000000005;0.046400000000000004;165.14
+FuzzyCMeans1720;EuclideanDistance;7;true;true;true;true;true;true;false;0.185;0.0089;7145.1344;816.2613;74845.9079;7744.5879;0.6799000000000001;0.056;163.98
+KMeans1720;CosineDistance;7;true;true;true;false;false;false;false;0.5184;0.0468;3.08;0.16970000000000002;4.1009;0.0935;0.1451;0.0373;37.68
+KMeans1720;CosineDistance;7;true;true;true;false;false;false;true;0.37;0.05;5.4802;0.3599;7.4615;0.269;0.115;0.0379;7.87
+KMeans1720;CosineDistance;7;true;true;true;false;false;true;false;0.3654;0.0487;62.6437;5.0225;81.90610000000001;4.9596;0.0373;0.0381;6.95
+KMeans1720;CosineDistance;7;true;true;true;false;true;false;false;0.257;0.025400000000000002;40.129000000000005;4.1031;68.8819;4.5426;-0.094;0.0478;24.63
+KMeans1720;CosineDistance;7;true;true;true;false;true;false;true;0.28090000000000004;0.033800000000000004;6.5252;0.6325000000000001;10.2992;0.6028;-0.3007;0.0685;3.25
+KMeans1720;CosineDistance;7;true;true;true;false;true;true;false;0.28090000000000004;0.033800000000000004;48822.8945;5570.211;72344.142;5390.5789;-0.33140000000000003;0.0684;3.13
+KMeans1720;CosineDistance;7;true;true;true;true;false;false;false;0.5044000000000001;0.04;3.111;0.15660000000000002;4.1375;0.0956;0.1444;0.0364;35.05
+KMeans1720;CosineDistance;7;true;true;true;true;false;false;true;0.3834;0.051500000000000004;5.1064;0.3371;7.0926;0.3;0.12200000000000001;0.0357;7.23
+KMeans1720;CosineDistance;7;true;true;true;true;false;true;false;0.37920000000000004;0.0506;58.278200000000005;4.5865;77.55980000000001;5.2454;0.046;0.0376;7.57
+KMeans1720;CosineDistance;7;true;true;true;true;true;false;false;0.258;0.0347;30.672700000000003;3.0028;59.0349;3.7947;-0.047900000000000005;0.0483;28.99
+KMeans1720;CosineDistance;7;true;true;true;true;true;false;true;0.2777;0.0366;4.672000000000001;0.4913;8.063500000000001;0.6708000000000001;-0.26030000000000003;0.0606;2.99
+KMeans1720;CosineDistance;7;true;true;true;true;true;true;false;0.2777;0.0366;27554.8934;3420.7484;46899.3505;5322.4461;-0.2898;0.06670000000000001;3.11
+KMeans1720;EuclideanDistance;7;true;true;true;false;false;false;false;0.463;0.0427;2.0533;0.2927;4.2817;0.1565;0.25520000000000004;0.0637;48.87
+KMeans1720;EuclideanDistance;7;true;true;true;false;false;false;true;0.4097;0.0329;5.0585;0.4731;8.677100000000001;0.3462;0.1643;0.0403;26.48
+KMeans1720;EuclideanDistance;7;true;true;true;false;false;true;false;0.2796;0.0235;67.6106;5.1081;120.5886;9.599;0.1398;0.0378;35.63
+KMeans1720;EuclideanDistance;7;true;true;true;false;true;false;false;0.23750000000000002;0.0227;16.598100000000002;1.3901000000000001;77.11160000000001;9.5013;0.4274;0.0485;106.44
+KMeans1720;EuclideanDistance;7;true;true;true;false;true;false;true;0.22490000000000002;0.0279;0.9622;0.069;10.9052;1.4848000000000001;0.5737;0.0436;17.16
+KMeans1720;EuclideanDistance;7;true;true;true;false;true;true;false;0.21960000000000002;0.0179;8868.0786;721.639;96033.5651;14463.341900000001;0.66;0.0585;20.85
+KMeans1720;EuclideanDistance;7;true;true;true;true;false;false;false;0.4335;0.0368;2.1854;0.2812;4.3441;0.16740000000000002;0.2446;0.0582;51.8
+KMeans1720;EuclideanDistance;7;true;true;true;true;false;false;true;0.3972;0.036500000000000005;4.6204;0.4242;8.5624;0.4122;0.16440000000000002;0.0449;26.85
+KMeans1720;EuclideanDistance;7;true;true;true;true;false;true;false;0.2841;0.0253;64.1862;5.2298;119.1256;10.1234;0.1431;0.0371;29.16
+KMeans1720;EuclideanDistance;7;true;true;true;true;true;false;false;0.2233;0.020300000000000002;13.866900000000001;1.0423;66.25540000000001;9.3436;0.4198;0.048400000000000006;113.33
+KMeans1720;EuclideanDistance;7;true;true;true;true;true;false;true;0.20420000000000002;0.0137;0.7886000000000001;0.06470000000000001;9.2226;1.6397000000000002;0.6022000000000001;0.0386;18.41
+KMeans1720;EuclideanDistance;7;true;true;true;true;true;true;false;0.2275;0.0251;5169.4289;1227.3329;60478.315200000005;16547.075800000002;0.6843;0.0531;15.92
+KMeans1720;WordEmbDistance;7;true;true;true;false;false;false;false;0.3467;0.0076;-1.0;0.0;-1.0;0.0;-1.0;0.0;102196.79
+KMeans1720;WordEmbDistance;7;true;true;true;false;false;false;true;0.3467;0.0076;-1.0;0.0;-1.0;0.0;-1.0;0.0;107331.82
+KMeans1720;WordEmbDistance;7;true;true;true;false;false;true;false;0.3467;0.0076;-1.0;0.0;-1.0;0.0;-1.0;0.0;101913.18
+KMeans1720;WordEmbDistance;7;true;true;true;true;false;false;false;0.34940000000000004;0.0078000000000000005;-1.0;0.0;-1.0;0.0;-1.0;0.0;116582.1
+KMeans1720;WordEmbDistance;7;true;true;true;true;false;false;true;0.3497;0.0074;-1.0;0.0;-1.0;0.0;-1.0;0.0;109763.1
+KMeans1720;WordEmbDistance;7;true;true;true;true;false;true;false;0.34940000000000004;0.0078000000000000005;-1.0;0.0;-1.0;0.0;-1.0;0.0;115722.15
+Neural Gas;CosineDistance;7;true;true;true;false;false;false;false;0.3744;0.0;2.5242;0.0;2.4158;0.0;0.1353;0.0;35.37
+Neural Gas;CosineDistance;7;true;true;true;false;false;false;true;0.35760000000000003;0.0044;1.0689;0.0011;0.8279000000000001;0.2879;0.031;0.0023;11.88
+Neural Gas;CosineDistance;7;true;true;true;false;false;true;false;0.3517;0.0292;34.9585;2.4263;28.046200000000002;4.7676;0.029900000000000003;0.026500000000000003;13.3
+Neural Gas;CosineDistance;7;true;true;true;false;true;false;false;0.31120000000000003;0.0;19.724500000000003;0.0;12.065700000000001;0.0;-0.0816;0.0;93.8
+Neural Gas;CosineDistance;7;true;true;true;false;true;false;true;0.31020000000000003;0.0;3.9521;0.0;5.5807;0.0;-0.2973;0.0;11.55
+Neural Gas;CosineDistance;7;true;true;true;false;true;true;false;0.3276;0.0;18173.6139;0.0;29794.0083;0.0;-0.1826;0.0;11.9
+Neural Gas;CosineDistance;7;true;true;true;true;false;false;false;0.37570000000000003;0.0;2.0804;0.0;1.6838000000000002;0.0;0.055200000000000006;0.0;32.53
+Neural Gas;CosineDistance;7;true;true;true;true;false;false;true;0.4083;0.0083;3.4083;0.3145;3.3632;0.5339;0.07010000000000001;0.016900000000000002;11.49
+Neural Gas;CosineDistance;7;true;true;true;true;false;true;false;0.3831;0.0135;40.7455;4.9085;41.3637;6.8475;-7.0E-4;0.023;11.45
+Neural Gas;CosineDistance;7;true;true;true;true;true;false;false;0.2891;0.0;7.7602;0.0;12.9978;0.0;0.015000000000000001;0.0;97.54
+Neural Gas;CosineDistance;7;true;true;true;true;true;false;true;0.3032;0.0;1.7991000000000001;0.0;4.0006;0.0;-0.1124;0.0;11.13
+Neural Gas;CosineDistance;7;true;true;true;true;true;true;false;0.2844;0.0;7646.8613000000005;0.0;21767.0681;0.0;-6.000000000000001E-4;0.0;11.22
+Neural Gas;EuclideanDistance;7;true;true;true;false;false;false;false;0.37320000000000003;0.0013000000000000002;1.9459000000000002;0.0057;2.7212;0.3388;0.1328;0.0129;27.47
+Neural Gas;EuclideanDistance;7;true;true;true;false;false;false;true;0.3457;0.0031000000000000003;1.8743;0.277;0.637;0.14120000000000002;0.0591;0.01;10.26
+Neural Gas;EuclideanDistance;7;true;true;true;false;false;true;false;0.2679;0.0;46.200900000000004;0.0;55.319100000000006;0.0;0.0883;0.0;11.17
+Neural Gas;EuclideanDistance;7;true;true;true;false;true;false;false;0.23670000000000002;0.0;10.370800000000001;0.0;7.9336;0.0;0.0847;0.0;76.69
+Neural Gas;EuclideanDistance;7;true;true;true;false;true;false;true;0.2937;0.0;0.9549000000000001;0.0;3.5882;0.0;0.1242;0.0;10.1
+Neural Gas;EuclideanDistance;7;true;true;true;false;true;true;false;0.24230000000000002;0.0;5642.602400000001;0.0;9166.8402;0.0;0.2585;0.0;9.05
+Neural Gas;EuclideanDistance;7;true;true;true;true;false;false;false;0.3764;0.0;2.2668;0.0;2.048;0.0;0.0786;0.0;24.98
+Neural Gas;EuclideanDistance;7;true;true;true;true;false;false;true;0.38920000000000005;0.0;2.5020000000000002;0.0;1.5934000000000001;0.0;0.053000000000000005;0.0;9.72
+Neural Gas;EuclideanDistance;7;true;true;true;true;false;true;false;0.2746;0.0;45.4602;0.0;63.7851;0.0;0.1212;0.0;10.07
+Neural Gas;EuclideanDistance;7;true;true;true;true;true;false;false;0.24330000000000002;0.0;7.7193000000000005;0.0;16.2804;0.0;0.23040000000000002;0.0;77.96
+Neural Gas;EuclideanDistance;7;true;true;true;true;true;false;true;0.24980000000000002;0.0;0.7111000000000001;0.0;1.6598000000000002;0.0;0.0568;0.0;9.84
+Neural Gas;EuclideanDistance;7;true;true;true;true;true;true;false;0.2446;0.0;3975.1607000000004;0.0;6182.5079000000005;0.0;0.2656;0.0;10.97
+
