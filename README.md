@@ -581,7 +581,64 @@ ClusterART|10|Not needed|false|false|true|false|false|0.4338
 
 
 
-## Impact of Word2VecAdd
+
+## Impact of Word2VecAdd, external
+
+	select *, round(("F1 with Word2VecAdd"-"F1 without Word2VecAdd")/"F1 with Word2VecAdd"*100, 2) as "Difference in %" from (
+	select a.ClusterAlgorithm as "Cluster Algorithm", a.DistanceFunction as "Distance Function", max(a.F1WeightedAvg) as "F1 with Word2VecAdd", max(b.F1WeightedAvg) as "F1 without Word2VecAdd" from alpha a
+	left outer join alpha b on (b.ClusterAlgorithm = a.ClusterAlgorithm and a.DistanceFunction = b.DistanceFunction)
+	where a.Word2VecAdd = "true" and b.Word2VecAdd = "false"
+	group by a.ClusterAlgorithm, a.DistanceFunction
+	order by a.F1WeightedAvg desc
+	)
+	
+### alpha
+Cluster Algorithm|Distance Function|F1 with Word2VecAdd|F1 without Word2VecAdd|Difference in %
+---|---|---|---|---|
+FuzzyCMeans2320|CosineDistance|0.3205|0.3443|-7.43
+KMeans2320|CosineDistance|0.3165|0.3209|-1.39
+KMeans2320|WordEmbDistance|0.2465|0.2465|0.0
+KMeans2320|EuclideanDistance|0.2404|0.299|-24.38
+Neural Gas|CosineDistance|0.236|0.2314|1.95
+Neural Gas|EuclideanDistance|0.2347|0.2475|-5.45
+FuzzyCMeans2320|EuclideanDistance|0.214|0.2619|-22.38
+
+
+### beta
+Cluster Algorithm|Distance Function|F1 with Word2VecAdd|F1 without Word2VecAdd|Difference in %
+---|---|---|---|---|
+FuzzyCMeans1520|EuclideanDistance|0.4618|0.4512|2.3
+KMeans1520|WordEmbDistance|0.4529|0.459|-1.35
+Neural Gas|EuclideanDistance|0.4509|0.4872|-8.05
+Neural Gas|CosineDistance|0.5297|0.5285|0.23
+KMeans1520|EuclideanDistance|0.294|0.4282|-45.65
+KMeans1520|CosineDistance|0.3252|0.4161|-27.95
+FuzzyCMeans1520|CosineDistance|0.3283|0.4258|-29.7
+
+### gamma
+Cluster Algorithm|Distance Function|F1 with Word2VecAdd|F1 without Word2VecAdd|Difference in %
+---|---|---|---|---|
+KMeans1720|CosineDistance|0.3792|0.5184|-36.71
+Neural Gas|CosineDistance|0.3831|0.4083|-6.58
+KMeans1720|WordEmbDistance|0.3494|0.3497|-0.09
+FuzzyCMeans1720|CosineDistance|0.292|0.4353|-49.08
+KMeans1720|EuclideanDistance|0.2841|0.463|-62.97
+Neural Gas|EuclideanDistance|0.2746|0.3892|-41.73
+FuzzyCMeans1720|EuclideanDistance|0.2561|0.4352|-69.93
+
+
+### delta
+Cluster Algorithm|Distance Function|F1 with Word2VecAdd|F1 without Word2VecAdd|Difference in %
+---|---|---|---|---|
+Neural Gas|CosineDistance|0.4448|0.5102|-14.7
+Neural Gas|EuclideanDistance|0.4139|0.5082|-22.78
+KMeans1620|WordEmbDistance|0.4187|0.4187|0.0
+FuzzyCMeans1620|EuclideanDistance|0.3549|0.4394|-23.81
+KMeans1620|CosineDistance|0.3375|0.4604|-36.41
+KMeans1620|EuclideanDistance|0.2884|0.4248|-47.3
+FuzzyCMeans1620|CosineDistance|0.2856|0.3843|-34.56
+
+## Impact of Word2VecAdd, internal
 
 	select *, round(("Silhouette with Word2VecAdd"-"Silhouette without Word2VecAdd")/"Silhouette with Word2VecAdd"*100, 2) as "Difference" from (
 	select a.ClusterAlgorithm as "Cluster Algorithm", a.k as "k", a.DistanceFunction as "Distance Function", max(a.SilhouetteAvg) as "Silhouette with Word2VecAdd", max(b.SilhouetteAvg) as "Silhouette without Word2VecAdd" from alpha a
@@ -855,8 +912,63 @@ FuzzyCMeans3020|30|EuclideanDistance|0.6017|0.4035|32.94
 
 
 
+## Impact of Word2VecAverage, external
 
-## Impact of Word2VecAverage
+	select *, round(("F1 with Word2VecAverage"-"F1 without Word2VecAverage")/"F1 with Word2VecAverage"*100, 2) as "Difference in %" from (
+	select a.ClusterAlgorithm as "Cluster Algorithm", a.DistanceFunction as "Distance Function", max(a.F1WeightedAvg) as "F1 with Word2VecAverage", max(b.F1WeightedAvg) as "F1 without Word2VecAverage" from delta a
+	left outer join delta b on (b.ClusterAlgorithm = a.ClusterAlgorithm and a.DistanceFunction = b.DistanceFunction)
+	where a.Word2VecAverage = "true" and b.Word2VecAverage = "false"
+	group by a.ClusterAlgorithm, a.DistanceFunction
+	order by a.F1WeightedAvg desc
+	)
+
+### alpha
+Cluster Algorithm|Distance Function|F1 with Word2VecAverage|F1 without Word2VecAverage|Difference in %
+---|---|---|---|---|
+KMeans2320|CosineDistance|0.3209|0.3165|1.37
+FuzzyCMeans2320|CosineDistance|0.3134|0.3443|-9.86
+KMeans2320|EuclideanDistance|0.299|0.2845|4.85
+KMeans2320|WordEmbDistance|0.2465|0.2465|0.0
+Neural Gas|CosineDistance|0.2314|0.236|-1.99
+FuzzyCMeans2320|EuclideanDistance|0.2234|0.2619|-17.23
+Neural Gas|EuclideanDistance|0.2475|0.2347|5.17
+
+
+### beta
+Cluster Algorithm|Distance Function|F1 with Word2VecAverage|F1 without Word2VecAverage|Difference in %
+---|---|---|---|---|
+Neural Gas|EuclideanDistance|0.4872|0.4509|7.45
+KMeans1520|WordEmbDistance|0.459|0.459|0.0
+FuzzyCMeans1520|EuclideanDistance|0.381|0.4618|-21.21
+Neural Gas|CosineDistance|0.5284|0.5297|-0.25
+KMeans1520|EuclideanDistance|0.3252|0.4282|-31.67
+KMeans1520|CosineDistance|0.3206|0.4161|-29.79
+FuzzyCMeans1520|CosineDistance|0.3277|0.4258|-29.94
+
+### gamma
+Cluster Algorithm|Distance Function|F1 with Word2VecAverage|F1 without Word2VecAverage|Difference in %
+---|---|---|---|---|
+KMeans1720|EuclideanDistance|0.4097|0.463|-13.01
+KMeans1720|CosineDistance|0.3834|0.5184|-35.21
+Neural Gas|CosineDistance|0.4083|0.3831|6.17
+FuzzyCMeans1720|EuclideanDistance|0.3548|0.4352|-22.66
+KMeans1720|WordEmbDistance|0.3497|0.3494|0.09
+Neural Gas|EuclideanDistance|0.3892|0.3764|3.29
+FuzzyCMeans1720|CosineDistance|0.3048|0.4353|-42.81
+
+### delta
+Cluster Algorithm|Distance Function|F1 with Word2VecAverage|F1 without Word2VecAverage|Difference in %
+---|---|---|---|---|
+Neural Gas|EuclideanDistance|0.4552|0.5082|-11.64
+FuzzyCMeans1620|EuclideanDistance|0.4394|0.4323|1.62
+Neural Gas|CosineDistance|0.4357|0.5102|-17.1
+KMeans1620|EuclideanDistance|0.3971|0.4248|-6.98
+KMeans1620|WordEmbDistance|0.4187|0.4187|0.0
+KMeans1620|CosineDistance|0.3478|0.4604|-32.37
+FuzzyCMeans1620|CosineDistance|0.2863|0.3843|-34.23
+
+
+## Impact of Word2VecAverage, internal
 
 	select *, round(("Silhouette with Word2VecAverage"-"Silhouette without Word2VecAverage")/"Silhouette with Word2VecAverage"*100, 2) as "Difference" from (
 	select a.ClusterAlgorithm as "Cluster Algorithm", a.k as "k", a.DistanceFunction as "Distance Function", max(a.SilhouetteAvg) as "Silhouette with Word2VecAverage", max(b.SilhouetteAvg) as "Silhouette without Word2VecAverage" from gamma a
