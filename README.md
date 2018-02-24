@@ -552,3 +552,29 @@ FuzzyCMeans420|4|EuclideanDistance|false|false|true|false|true|0.5503
 FuzzyCMeans320|3|EuclideanDistance|false|false|true|false|true|0.5451
 FuzzyCMeans520|5|EuclideanDistance|false|false|true|false|true|0.5213
 ClusterART|10|Not needed|false|false|true|false|false|0.4338
+
+
+
+## k vs. Silhouette, Top 15
+
+		select k, max(SilhouetteAvg) from delta group by k order by SilhouetteAvg desc
+	limit 15
+
+
+
+### alpha
+
+![](kvssilhouette-alpha.png)
+
+### beta
+
+![](kvssilhouette-beta.png)
+
+### gamma
+
+![](kvssilhouette-gamma.png)
+
+
+### delta
+
+![](kvssilhouette-delta.png)
