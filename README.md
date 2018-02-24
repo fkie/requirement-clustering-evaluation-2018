@@ -89,7 +89,7 @@ dataset|count
 	
 ### alpha
 
-clusteralgorithm|distancefunction|usedfields|tfidf|stopwords|interpreted|lemmatized|source| Word2VecAdd|Word2VecAverage|F1WeightedAvg
+clusteralgorithm|distancefunction|usedfields|tfidf|stopwords|lemmatized|synonyms|germanetfunction|Word2VecAdd|Word2VecAverage|F1WeightedAvg
 ---|---|---|---|---|---|---|---|---|---|---|
 FuzzyCMeans2320|CosineDistance|7|true|true|true|false|false|false|false|0.3443
 FuzzyCMeans2320|CosineDistance|7|true|true|true|true|false|false|false|0.3417
@@ -105,7 +105,7 @@ KMeans2320|CosineDistance|7|true|true|true|false|false|false|false|0.2987
 
 ### beta
 
-clusteralgorithm|distancefunction|usedfields|tfidf|stopwords|interpreted|lemmatized|source| Word2VecAdd|Word2VecAverage|F1WeightedAvg
+clusteralgorithm|distancefunction|usedfields|tfidf|stopwords|lemmatized|synonyms|germanetfunction|Word2VecAdd|Word2VecAverage|F1WeightedAvg
 ---|---|---|---|---|---|---|---|---|---|---|
 ClusterART|Not needed|7|true|true|true|true|true|false|false|0.7506
 Neural Gas|CosineDistance|7|true|true|true|true|true|true|false|0.5297
@@ -121,7 +121,7 @@ KMeans1520|WordEmbDistance|7|true|true|true|true|false|false|true|0.459
 
 
 ### gamma
-clusteralgorithm|distancefunction|usedfields|tfidf|stopwords|interpreted|lemmatized|source| Word2VecAdd|Word2VecAverage|F1WeightedAvg
+clusteralgorithm|distancefunction|usedfields|tfidf|stopwords|lemmatized|synonyms|germanetfunction|Word2VecAdd|Word2VecAverage|F1WeightedAvg
 ---|---|---|---|---|---|---|---|---|---|---|
 KMeans1720|CosineDistance|7|true|true|true|false|false|false|false|0.5184
 KMeans1720|CosineDistance|7|true|true|true|true|false|false|false|0.5044
@@ -136,7 +136,7 @@ KMeans1720|EuclideanDistance|7|true|true|true|false|false|false|true|0.4097
 
 
 ### delta
-clusteralgorithm|distancefunction|usedfields|tfidf|stopwords|interpreted|lemmatized|source| Word2VecAdd|Word2VecAverage|F1WeightedAvg
+clusteralgorithm|distancefunction|usedfields|tfidf|stopwords|lemmatized|synonyms|germanetfunction|Word2VecAdd|Word2VecAverage|F1WeightedAvg
 ---|---|---|---|---|---|---|---|---|---|---|
 ClusterART|Not needed|7|true|true|true|true|false|false|false|0.5622
 ClusterART|Not needed|7|true|true|true|false|false|false|false|0.5584
@@ -214,3 +214,26 @@ k|clusteralgorithm|distancefunction|word2vecadd|word2vecaverage|SilhouetteAvg
 13|KMeans1320|EuclideanDistance|true|false|0.7117
 12|KMeans1220|EuclideanDistance|true|false|0.7104
 16|KMeans1620|EuclideanDistance|true|false|0.7103
+
+
+
+## Correlation between Silhouette and F1
+
+	select SilhouetteAvg,F1WeightedAvg from alpha
+	where distancefunction <> "WordEmbDistance" -- Not supported distance function
+
+
+### alpha
+
+	CORREL(SilhouetteAvg, F1WeightedAvg) = -0.002879579897854
+
+### beta
+
+	CORREL(SilhouetteAvg, F1WeightedAvg) = -0.321574158661689
+
+### gamma
+
+	CORREL(SilhouetteAvg, F1WeightedAvg) = -0.211575766205108
+
+### delta
+	CORREL(SilhouetteAvg, F1WeightedAvg) = -0.195570970269602
