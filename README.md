@@ -5,36 +5,30 @@
 
 	sqlite3 external.db << EOF
 	
-	create table alpha (ClusterAlgorithm, DistanceFunction, UsedFields, Tfidf, StopWords, Interpreted, Lemmatized, Source, Synonyms, GermaNetFunction, F1WeightedAvg REAL, F1WeightedStd REAL, CohesionAvg REAL, CohesionStd REAL, SeperationAvg REAL, SeperationStd REAL, SilhouetteAvg REAL, SilhouetteStd REAL, RuntimeAvg REAL);
+	create table alpha (ClusterAlgorithm, DistanceFunction, UsedFields, Tfidf, StopWords, Lemmatized, Synonyms, GermaNetFunction, Word2VecAdd REAL, Word2VecAverage REAL, F1WeightedAvg REAL, F1WeightedStd REAL, CohesionAvg REAL, CohesionStd REAL, SeperationAvg REAL, SeperationStd REAL, SilhouetteAvg REAL, SilhouetteStd REAL, RuntimeAvg REAL);
 	.separator ";"
 	.import "alpha.csv" "alpha"
 	DELETE from alpha WHERE SeperationAvg = 'SeperationAvg';
 	DELETE from alpha WHERE ClusterAlgorithm = '';
 	
-	create table beta (ClusterAlgorithm, DistanceFunction, UsedFields, Tfidf, StopWords, Interpreted, Lemmatized, Source, Synonyms, GermaNetFunction, F1WeightedAvg REAL, F1WeightedStd REAL, CohesionAvg REAL, CohesionStd REAL, SeperationAvg REAL, SeperationStd REAL, SilhouetteAvg REAL, SilhouetteStd REAL, RuntimeAvg REAL);
+	create table beta (ClusterAlgorithm, DistanceFunction, UsedFields, Tfidf, StopWords, Lemmatized, Synonyms, GermaNetFunction, Word2VecAdd REAL, Word2VecAverage REAL, F1WeightedAvg REAL, F1WeightedStd REAL, CohesionAvg REAL, CohesionStd REAL, SeperationAvg REAL, SeperationStd REAL, SilhouetteAvg REAL, SilhouetteStd REAL, RuntimeAvg REAL);
 	.separator ";"
 	.import "beta.csv" "beta"
 	DELETE from beta WHERE SeperationAvg = 'SeperationAvg';
 	DELETE from beta WHERE ClusterAlgorithm = '';
 	
-	create table gamma (ClusterAlgorithm, DistanceFunction, UsedFields, Tfidf, StopWords, Interpreted, Lemmatized, Source, Synonyms, GermaNetFunction, F1WeightedAvg REAL, F1WeightedStd REAL, CohesionAvg REAL, CohesionStd REAL, SeperationAvg REAL, SeperationStd REAL, SilhouetteAvg REAL, SilhouetteStd REAL, RuntimeAvg REAL);
+	create table gamma (ClusterAlgorithm, DistanceFunction, UsedFields, Tfidf, StopWords, Lemmatized, Synonyms, GermaNetFunction, Word2VecAdd REAL, Word2VecAverage REAL, F1WeightedAvg REAL, F1WeightedStd REAL, CohesionAvg REAL, CohesionStd REAL, SeperationAvg REAL, SeperationStd REAL, SilhouetteAvg REAL, SilhouetteStd REAL, RuntimeAvg REAL);
 	.separator ";"
 	.import "gamma.csv" "gamma"
 	DELETE from gamma WHERE SeperationAvg = 'SeperationAvg';
 	DELETE from gamma WHERE ClusterAlgorithm = '';
 	
-	create table delta (ClusterAlgorithm, DistanceFunction, UsedFields, Tfidf, StopWords, Interpreted, Lemmatized, Source, Synonyms, GermaNetFunction, F1WeightedAvg REAL, F1WeightedStd REAL, CohesionAvg REAL, CohesionStd REAL, SeperationAvg REAL, SeperationStd REAL, SilhouetteAvg REAL, SilhouetteStd REAL, RuntimeAvg REAL);
+	create table delta (ClusterAlgorithm, DistanceFunction, UsedFields, Tfidf, StopWords, Lemmatized, Synonyms, GermaNetFunction, Word2VecAdd REAL, Word2VecAverage REAL, F1WeightedAvg REAL, F1WeightedStd REAL, CohesionAvg REAL, CohesionStd REAL, SeperationAvg REAL, SeperationStd REAL, SilhouetteAvg REAL, SilhouetteStd REAL, RuntimeAvg REAL);
 	.separator ";"
 	.import "delta.csv" "delta"
 	DELETE from delta WHERE SeperationAvg = 'SeperationAvg';
 	DELETE from delta WHERE ClusterAlgorithm = '';
 		
-	create table zeta (ClusterAlgorithm, DistanceFunction, UsedFields, Tfidf, StopWords, Interpreted, Lemmatized, Source, Synonyms, GermaNetFunction, F1WeightedAvg REAL, F1WeightedStd REAL, CohesionAvg REAL, CohesionStd REAL, SeperationAvg REAL, SeperationStd REAL, SilhouetteAvg REAL, SilhouetteStd REAL, RuntimeAvg REAL);
-	.separator ";"
-	.import "zeta.csv" "zeta"
-	DELETE from zeta WHERE SeperationAvg = 'SeperationAvg';
-	DELETE from zeta WHERE ClusterAlgorithm = '';
-	
 	EOF
 
 
@@ -42,25 +36,25 @@
 
 	sqlite3 internal.db << EOF
 	
-	create table alpha (ClusterAlgorithm, DistanceFunction, Synonyms, GermaNetFunction, Word2VecAdd, Word2VecAverage, k, CohesionAvg	REAL, CohesionStd REAL, SeperationAvg REAL, SeperationStd REAL, SilhouetteAvg REAL, SilhouetteStd REAL, RuntimeAvg REAL);
+	create table alpha (ClusterAlgorithm, DistanceFunction, Synonyms, GermaNetFunction, Word2VecAdd REAL, Word2VecAverage REAL, k, CohesionAvg REAL, CohesionStd REAL, SeperationAvg REAL, SeperationStd REAL, SilhouetteAvg REAL, SilhouetteStd REAL, RuntimeAvg REAL);
 	.separator ";"
 	.import "alpha.csv" "alpha"
 	DELETE from alpha WHERE SeperationAvg = 'SeperationAvg';
 	DELETE from alpha WHERE ClusterAlgorithm = '';
 	
-	create table beta (ClusterAlgorithm, DistanceFunction, Synonyms, GermaNetFunction, Word2VecAdd, Word2VecAverage, k, CohesionAvg	REAL, CohesionStd REAL, SeperationAvg REAL, SeperationStd REAL, SilhouetteAvg REAL, SilhouetteStd REAL, RuntimeAvg REAL);
+	create table beta (ClusterAlgorithm, DistanceFunction, Synonyms, GermaNetFunction, Word2VecAdd REAL, Word2VecAverage REAL, k, CohesionAvg REAL, CohesionStd REAL, SeperationAvg REAL, SeperationStd REAL, SilhouetteAvg REAL, SilhouetteStd REAL, RuntimeAvg REAL);
 	.separator ";"
 	.import "beta.csv" "beta"
 	DELETE from beta WHERE SeperationAvg = 'SeperationAvg';
 	DELETE from beta WHERE ClusterAlgorithm = '';
 	
-	create table gamma (ClusterAlgorithm, DistanceFunction, Synonyms, GermaNetFunction, Word2VecAdd, Word2VecAverage, k, CohesionAvg	REAL, CohesionStd REAL, SeperationAvg REAL, SeperationStd REAL, SilhouetteAvg REAL, SilhouetteStd REAL, RuntimeAvg REAL);
+	create table gamma (ClusterAlgorithm, DistanceFunction, Synonyms, GermaNetFunction, Word2VecAdd REAL, Word2VecAverage REAL, k, CohesionAvg REAL, CohesionStd REAL, SeperationAvg REAL, SeperationStd REAL, SilhouetteAvg REAL, SilhouetteStd REAL, RuntimeAvg REAL);
 	.separator ";"
 	.import "gamma.csv" "gamma"
 	DELETE from gamma WHERE SeperationAvg = 'SeperationAvg';
 	DELETE from gamma WHERE ClusterAlgorithm = '';
 	
-	create table delta (ClusterAlgorithm, DistanceFunction, Synonyms, GermaNetFunction, Word2VecAdd, Word2VecAverage, k, CohesionAvg	REAL, CohesionStd REAL, SeperationAvg REAL, SeperationStd REAL, SilhouetteAvg REAL, SilhouetteStd REAL, RuntimeAvg REAL);
+	create table delta (ClusterAlgorithm, DistanceFunction, Synonyms, GermaNetFunction, Word2VecAdd REAL, Word2VecAverage REAL, k, CohesionAvg REAL, CohesionStd REAL, SeperationAvg REAL, SeperationStd REAL, SilhouetteAvg REAL, SilhouetteStd REAL, RuntimeAvg REAL);
 	.separator ";"
 	.import "delta.csv" "delta"
 	DELETE from delta WHERE SeperationAvg = 'SeperationAvg';
@@ -89,7 +83,73 @@ dataset|count
 
 
 
-## Top 10 Performers (internal metric)
+## Top 10 Performers, external metric
+	select clusteralgorithm,distancefunction,usedfields,tfidf,stopwords,lemmatized,synonyms,germanetfunction,Word2VecAdd,Word2VecAverage,F1WeightedAvg from alpha order by F1WeightedAvg desc
+	limit 10
+	
+### alpha
+
+clusteralgorithm|distancefunction|usedfields|tfidf|stopwords|interpreted|lemmatized|source| Word2VecAdd|Word2VecAverage|F1WeightedAvg
+---|---|---|---|---|---|---|---|---|---|---|
+FuzzyCMeans2320|CosineDistance|7|true|true|true|false|false|false|false|0.3443
+FuzzyCMeans2320|CosineDistance|7|true|true|true|true|false|false|false|0.3417
+KMeans2320|CosineDistance|7|true|true|true|false|false|false|true|0.3209
+FuzzyCMeans2320|CosineDistance|7|true|true|true|false|false|true|false|0.3205
+KMeans2320|CosineDistance|7|true|true|true|false|false|true|false|0.3165
+FuzzyCMeans2320|CosineDistance|7|true|true|true|false|false|false|true|0.3134
+FuzzyCMeans2320|CosineDistance|7|true|true|true|true|false|true|false|0.3002
+KMeans2320|CosineDistance|7|true|true|true|true|false|false|true|0.299
+KMeans2320|EuclideanDistance|7|true|true|true|false|false|false|true|0.299
+KMeans2320|CosineDistance|7|true|true|true|false|false|false|false|0.2987
+
+
+### beta
+
+clusteralgorithm|distancefunction|usedfields|tfidf|stopwords|interpreted|lemmatized|source| Word2VecAdd|Word2VecAverage|F1WeightedAvg
+---|---|---|---|---|---|---|---|---|---|---|
+ClusterART|Not needed|7|true|true|true|true|true|false|false|0.7506
+Neural Gas|CosineDistance|7|true|true|true|true|true|true|false|0.5297
+Neural Gas|CosineDistance|7|true|true|true|true|true|false|false|0.5285
+Neural Gas|CosineDistance|7|true|true|true|true|true|false|true|0.5284
+ClusterART|Not needed|7|true|true|true|false|true|false|false|0.5024
+Neural Gas|EuclideanDistance|7|true|true|true|true|true|false|true|0.4872
+FuzzyCMeans1520|EuclideanDistance|7|true|true|true|false|false|true|false|0.4618
+Neural Gas|EuclideanDistance|7|true|true|true|true|false|false|true|0.4617
+KMeans1520|WordEmbDistance|7|true|true|true|true|false|false|false|0.459
+KMeans1520|WordEmbDistance|7|true|true|true|true|false|false|true|0.459
+
+
+
+### gamma
+clusteralgorithm|distancefunction|usedfields|tfidf|stopwords|interpreted|lemmatized|source| Word2VecAdd|Word2VecAverage|F1WeightedAvg
+---|---|---|---|---|---|---|---|---|---|---|
+KMeans1720|CosineDistance|7|true|true|true|false|false|false|false|0.5184
+KMeans1720|CosineDistance|7|true|true|true|true|false|false|false|0.5044
+ClusterART|Not needed|7|true|true|true|true|false|false|false|0.4662
+KMeans1720|EuclideanDistance|7|true|true|true|false|false|false|false|0.463
+FuzzyCMeans1720|CosineDistance|7|true|true|true|false|false|false|false|0.4353
+FuzzyCMeans1720|EuclideanDistance|7|true|true|true|false|false|false|false|0.4352
+KMeans1720|EuclideanDistance|7|true|true|true|true|false|false|false|0.4335
+FuzzyCMeans1720|CosineDistance|7|true|true|true|true|false|false|false|0.417
+FuzzyCMeans1720|EuclideanDistance|7|true|true|true|true|false|false|false|0.4111
+KMeans1720|EuclideanDistance|7|true|true|true|false|false|false|true|0.4097
+
+
+### delta
+clusteralgorithm|distancefunction|usedfields|tfidf|stopwords|interpreted|lemmatized|source| Word2VecAdd|Word2VecAverage|F1WeightedAvg
+---|---|---|---|---|---|---|---|---|---|---|
+ClusterART|Not needed|7|true|true|true|true|false|false|false|0.5622
+ClusterART|Not needed|7|true|true|true|false|false|false|false|0.5584
+Neural Gas|CosineDistance|7|true|true|true|false|false|false|false|0.5102
+Neural Gas|CosineDistance|7|true|true|true|true|false|false|false|0.5093
+Neural Gas|EuclideanDistance|7|true|true|true|false|false|false|false|0.5082
+Neural Gas|EuclideanDistance|7|true|true|true|true|false|false|false|0.5017
+KMeans1620|CosineDistance|7|true|true|true|false|false|false|false|0.4604
+Neural Gas|EuclideanDistance|7|true|true|true|true|false|false|true|0.4552
+Neural Gas|EuclideanDistance|7|true|true|true|false|false|false|true|0.454
+KMeans1620|CosineDistance|7|true|true|true|true|false|false|false|0.45
+
+## Top 10 Performers, internal metric
 
 	select k, clusteralgorithm, distancefunction,word2vecadd,word2vecaverage,SilhouetteAvg from alpha order by silhouetteavg desc
 	limit 10
