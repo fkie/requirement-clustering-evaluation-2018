@@ -237,3 +237,45 @@ k|clusteralgorithm|distancefunction|word2vecadd|word2vecaverage|SilhouetteAvg
 
 ### delta
 	CORREL(SilhouetteAvg, F1WeightedAvg) = -0.195570970269602
+
+
+## Best performances per parameter (external)
+
+	select ClusterAlgorithm, DistanceFunction, UsedFields, Tfidf, Synonyms, GermaNetFunction,max(F1WeightedAvg) BestF1 from alpha
+	group by ClusterAlgorithm
+	order by BestF1 desc
+
+
+### alpha
+ClusterAlgorithm|DistanceFunction|UsedFields|Tfidf|Synonyms|GermaNetFunction|BestF1
+---|---|---|---|---|---|---|
+FuzzyCMeans2320|CosineDistance|7|true|false|false|0.3443
+KMeans2320|CosineDistance|7|true|false|false|0.3209
+Neural Gas|EuclideanDistance|7|true|false|true|0.2475
+ClusterART|Not needed|7|true|false|false|0.2383
+
+
+### beta
+ClusterAlgorithm|DistanceFunction|UsedFields|Tfidf|Synonyms|GermaNetFunction|BestF1
+---|---|---|---|---|---|---|
+ClusterART|Not needed|7|true|true|true|0.7506
+Neural Gas|CosineDistance|7|true|true|true|0.5297
+FuzzyCMeans1520|EuclideanDistance|7|true|false|false|0.4618
+KMeans1520|WordEmbDistance|7|true|true|false|0.459
+
+
+### gamma
+ClusterAlgorithm|DistanceFunction|UsedFields|Tfidf|Synonyms|GermaNetFunction|BestF1
+---|---|---|---|---|---|---|
+KMeans1720|CosineDistance|7|true|false|false|0.5184
+ClusterART|Not needed|7|true|true|false|0.4662
+FuzzyCMeans1720|CosineDistance|7|true|false|false|0.4353
+Neural Gas|CosineDistance|7|true|true|false|0.4083
+
+### delta
+ClusterAlgorithm|DistanceFunction|UsedFields|Tfidf|Synonyms|GermaNetFunction|BestF1
+---|---|---|---|---|---|---|
+ClusterART|Not needed|7|true|true|false|0.5622
+Neural Gas|CosineDistance|7|true|false|false|0.5102
+KMeans1620|CosineDistance|7|true|false|false|0.4604
+FuzzyCMeans1620|EuclideanDistance|7|true|false|false|0.4394
