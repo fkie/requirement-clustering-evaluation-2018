@@ -615,6 +615,30 @@ ClusterART|10|Not needed|false|false|true|false|false|0.4338
 
 
 
+## k vs. Silhouette, sorted by k
+
+	select k, max(SilhouetteAvg) from gamma group by k order by SilhouetteAvg desc
+
+
+
+### alpha
+
+![](kvssilhouette-ksorted-alpha.png)
+
+### beta
+
+![](kvssilhouette-ksorted-beta.png)
+
+### gamma
+
+![](kvssilhouette-ksorted-gamma.png)
+
+
+### delta
+
+![](kvssilhouette-ksorted-delta.png)
+
+
 ## k vs. Silhouette, Top 15
 
 		select k, max(SilhouetteAvg) from delta group by k order by SilhouetteAvg desc
