@@ -724,10 +724,12 @@ FuzzyCMeans1620|CosineDistance|0.2856|0.3843|-34.56
 
 ## Impact of Word2VecAdd, internal
 
-	select *, round(("Silhouette with Word2VecAdd"-"Silhouette without Word2VecAdd")/"Silhouette with Word2VecAdd"*100, 2) as "Difference" from (
-	select a.ClusterAlgorithm as "Cluster Algorithm", a.k as "k", a.DistanceFunction as "Distance Function", max(a.SilhouetteAvg) as "Silhouette with Word2VecAdd", max(b.SilhouetteAvg) as "Silhouette without Word2VecAdd" from alpha a
+
+#TIMM
+	select *, round(("Silhouette with Word2VecAdd"-"Silhouette without Word2VecAdd / Word2VecAverage")/"Silhouette with Word2VecAdd"*100, 2) as "Difference" from (
+	select a.ClusterAlgorithm as "Cluster Algorithm", a.k as "k", a.DistanceFunction as "Distance Function", max(a.SilhouetteAvg) as "Silhouette with Word2VecAdd", max(b.SilhouetteAvg) as "Silhouette without Word2VecAdd / Word2VecAverage" from alpha a
 	left outer join alpha b on (b.ClusterAlgorithm = a.ClusterAlgorithm and a.k = b.k and a.DistanceFunction = b.DistanceFunction)
-	where a.Word2VecAdd = "true" and b.Word2VecAdd = "false"
+	where a.Word2VecAdd = "true" and b.Word2VecAdd = "false" and b.Word2VecAverage = "false"
 	group by a.ClusterAlgorithm, a.k, a.DistanceFunction
 	order by a.SilhouetteAvg desc
 	)
@@ -1322,3 +1324,74 @@ FuzzyCMeans2720|27|EuclideanDistance|0.4279|0.6413|-49.87
 FuzzyCMeans2920|29|EuclideanDistance|0.4115|0.6153|-49.53
 FuzzyCMeans2820|28|EuclideanDistance|0.4162|0.6359|-52.79
 FuzzyCMeans3020|30|EuclideanDistance|0.4035|0.6017|-49.12
+
+
+
+
+## Impact of WordEmbeddings and Ontologies external
+	
+	select "Cluster Algorithm", "baseline F1",  round(("ontologies F1"-"baseline F1")/"baseline F1"*100,2) || ' %' "ontologies F1 impact", round(("wordembeddings F1"-"baseline F1")/"baseline F1"*100,2) || ' %' "wordembeddings F1 impact", round(("both F1"-"baseline F1")/"baseline F1"*100,2) || ' %' "both F1 impact"  from(
+		select baseline.ClusterAlgorithm as "Cluster Algorithm", max(baseline.F1WeightedAvg) "baseline F1", max(ontologies.F1WeightedAvg) "ontologies F1", max(wordembeddings.F1WeightedAvg) "wordembeddings F1", max(both.F1WeightedAvg) "both F1" from delta baseline
+		left outer join delta ontologies on (ontologies.ClusterAlgorithm = baseline.ClusterAlgorithm and baseline.DistanceFunction = ontologies.DistanceFunction and ((ontologies.synonyms = "true" or ontologies.germanetfunction = "true") and ontologies.Word2VecAdd = "false" and ontologies.Word2VecAverage = "false"  and  ontologies.distancefunction <> "WordEmbDistance"))
+	    left outer join delta wordembeddings on (wordembeddings.ClusterAlgorithm = baseline.ClusterAlgorithm and baseline.DistanceFunction = wordembeddings.DistanceFunction and ((wordembeddings.Word2VecAdd = "true" or wordembeddings.Word2VecAverage = "true")  and  wordembeddings.distancefunction <> "WordEmbDistance" and wordembeddings.synonyms = "false" and wordembeddings.germanetfunction = "false"))
+		left outer join delta both on (both.ClusterAlgorithm = baseline.ClusterAlgorithm and baseline.DistanceFunction = both.DistanceFunction and ((both.Word2VecAdd = "true" or both.Word2VecAverage = "true")  and  both.distancefunction <> "WordEmbDistance" and  (both.synonyms = "true" or both.germanetfunction = "true") ))
+		where baseline.Germanetfunction = "false" and baseline.Synonyms = "false" and baseline.Word2VecAdd = "false" and baseline.Word2VecAverage = "false"  and  baseline.distancefunction <> "WordEmbDistance"
+		
+		group by baseline.ClusterAlgorithm
+		order by (both.F1WeightedAvg) desc
+	)
+
+
+### alpha
+Cluster Algorithm|Baseline F1|ontologies F1 impact|wordembeddings F1 impact|both F1 impact|
+----|----|----|----|----|
+FuzzyCMeans2320|0.3443|-0.76 %|-6.91 %|-12.81 %
+KMeans2320|0.2987|-0.74 %|7.43 %|0.1 %
+Neural Gas|0.2053|10.28 %|-8.91 %|20.56 %
+ClusterART|0.2383|-7.76 %||
+
+
+### beta
+Cluster Algorithm|Baseline F1|ontologies F1 impact|wordembeddings F1 impact|both F1 impact|
+----|----|----|----|----|
+Neural Gas|0.3921|34.79 %|16.93 %|35.09 %
+FuzzyCMeans1520|0.4512|-7.14 %|2.35 %|-4.32 %
+KMeans1520|0.428|0.05 %|-26.36 %|-24.02 %
+ClusterART|0.4127|81.88 %||	
+
+
+### gamma
+Cluster Algorithm|Baseline F1|ontologies F1 impact|wordembeddings F1 impact|both F1 impact|
+----|----|----|----|----|
+Neural Gas|0.3921|34.79 %|16.93 %|35.09 %
+FuzzyCMeans1520|0.4512|-7.14 %|2.35 %|-4.32 %
+KMeans1520|0.428|0.05 %|-26.36 %|-24.02 %
+ClusterART|0.4127|81.88 %||
+
+
+
+### delta
+Cluster Algorithm|Baseline F1|ontologies F1 impact|wordembeddings F1 impact|both F1 impact|
+----|----|----|----|----|
+Neural Gas|0.5102|-0.18 %|-11.02 %|-10.78 %
+FuzzyCMeans1620|0.4323|-10.55 %|1.64 %|-1.55 %
+KMeans1620|0.4604|-2.26 %|-13.75 %|-14.29 %
+ClusterART|0.5584|0.68 %||
+
+
+
+
+## Impact of WordEmbeddings and Ontologies internal
+
+
+	select "Cluster Algorithm", "baseline F1",  round(("ontologies F1"-"baseline F1")/"baseline F1"*100,2) || ' %' "ontologies F1 impact", round(("wordembeddings F1"-"baseline F1")/"baseline F1"*100,2) || ' %' "wordembeddings F1 impact", round(("both F1"-"baseline F1")/"baseline F1"*100,2) || ' %' "both F1 impact"  from(
+			select baseline.ClusterAlgorithm as "Cluster Algorithm", max(baseline.SilhouetteAvg) "baseline F1", max(ontologies.SilhouetteAvg) "ontologies F1", max(wordembeddings.SilhouetteAvg) "wordembeddings F1", max(both.SilhouetteAvg) "both F1" from delta baseline
+			left outer join delta ontologies on (ontologies.ClusterAlgorithm = baseline.ClusterAlgorithm and baseline.DistanceFunction = ontologies.DistanceFunction and ((ontologies.synonyms = "true" or ontologies.germanetfunction = "true") and ontologies.Word2VecAdd = "false" and ontologies.Word2VecAverage = "false"  and  ontologies.distancefunction <> "WordEmbDistance"))
+		    left outer join delta wordembeddings on (wordembeddings.ClusterAlgorithm = baseline.ClusterAlgorithm and baseline.DistanceFunction = wordembeddings.DistanceFunction and ((wordembeddings.Word2VecAdd = "true" or wordembeddings.Word2VecAverage = "true")  and  wordembeddings.distancefunction <> "WordEmbDistance" and wordembeddings.synonyms = "false" and wordembeddings.germanetfunction = "false"))
+			left outer join delta both on (both.ClusterAlgorithm = baseline.ClusterAlgorithm and baseline.DistanceFunction = both.DistanceFunction and ((both.Word2VecAdd = "true" or both.Word2VecAverage = "true")  and  both.distancefunction <> "WordEmbDistance" and  (both.synonyms = "true" or both.germanetfunction = "true") ))
+			where baseline.Germanetfunction = "false" and baseline.Synonyms = "false" and baseline.Word2VecAdd = "false" and baseline.Word2VecAverage = "false"  and  baseline.distancefunction <> "WordEmbDistance"
+			
+			group by baseline.ClusterAlgorithm
+			order by (both.SilhouetteAvg) desc
+		)
+		
