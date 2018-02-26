@@ -1384,14 +1384,281 @@ ClusterART|0.5584|0.68 %||
 ## Impact of WordEmbeddings and Ontologies internal
 
 
-	select "Cluster Algorithm", "baseline F1",  round(("ontologies F1"-"baseline F1")/"baseline F1"*100,2) || ' %' "ontologies F1 impact", round(("wordembeddings F1"-"baseline F1")/"baseline F1"*100,2) || ' %' "wordembeddings F1 impact", round(("both F1"-"baseline F1")/"baseline F1"*100,2) || ' %' "both F1 impact"  from(
-			select baseline.ClusterAlgorithm as "Cluster Algorithm", max(baseline.SilhouetteAvg) "baseline F1", max(ontologies.SilhouetteAvg) "ontologies F1", max(wordembeddings.SilhouetteAvg) "wordembeddings F1", max(both.SilhouetteAvg) "both F1" from delta baseline
-			left outer join delta ontologies on (ontologies.ClusterAlgorithm = baseline.ClusterAlgorithm and baseline.DistanceFunction = ontologies.DistanceFunction and ((ontologies.synonyms = "true" or ontologies.germanetfunction = "true") and ontologies.Word2VecAdd = "false" and ontologies.Word2VecAverage = "false"  and  ontologies.distancefunction <> "WordEmbDistance"))
-		    left outer join delta wordembeddings on (wordembeddings.ClusterAlgorithm = baseline.ClusterAlgorithm and baseline.DistanceFunction = wordembeddings.DistanceFunction and ((wordembeddings.Word2VecAdd = "true" or wordembeddings.Word2VecAverage = "true")  and  wordembeddings.distancefunction <> "WordEmbDistance" and wordembeddings.synonyms = "false" and wordembeddings.germanetfunction = "false"))
-			left outer join delta both on (both.ClusterAlgorithm = baseline.ClusterAlgorithm and baseline.DistanceFunction = both.DistanceFunction and ((both.Word2VecAdd = "true" or both.Word2VecAverage = "true")  and  both.distancefunction <> "WordEmbDistance" and  (both.synonyms = "true" or both.germanetfunction = "true") ))
-			where baseline.Germanetfunction = "false" and baseline.Synonyms = "false" and baseline.Word2VecAdd = "false" and baseline.Word2VecAverage = "false"  and  baseline.distancefunction <> "WordEmbDistance"
-			
-			group by baseline.ClusterAlgorithm
-			order by (both.SilhouetteAvg) desc
-		)
+	select "Cluster Algorithm", "baseline SilhouetteAvg",  round(("ontologies SilhouetteAvg"-"baseline SilhouetteAvg")/"baseline SilhouetteAvg"*100,2) || ' %' "ontologies SilhouetteAvg impact", round(("wordembeddings SilhouetteAvg"-"baseline SilhouetteAvg")/"baseline SilhouetteAvg"*100,2) || ' %' "wordembeddings SilhouetteAvg impact",
+	round(("both SilhouetteAvg"-"baseline SilhouetteAvg")/"baseline SilhouetteAvg"*100,2) || ' %' "both SilhouetteAvg impact"  from(
+	select baseline.ClusterAlgorithm as "Cluster Algorithm", max(baseline.SilhouetteAvg) "baseline SilhouetteAvg", max(ontologies.SilhouetteAvg) "ontologies SilhouetteAvg", max(wordembeddings.SilhouetteAvg) "wordembeddings SilhouetteAvg", max(both.SilhouetteAvg) "both SilhouetteAvg" from delta baseline
+	left outer join delta ontologies on (ontologies.ClusterAlgorithm = baseline.ClusterAlgorithm and baseline.DistanceFunction = ontologies.DistanceFunction and ((ontologies.synonyms = "true" or ontologies.germanetfunction = "true") and ontologies.Word2VecAdd = "false" and ontologies.Word2VecAverage = "false"  and  ontologies.distancefunction <> "WordEmbDistance"))
+	left outer join delta wordembeddings on (wordembeddings.ClusterAlgorithm = baseline.ClusterAlgorithm and baseline.DistanceFunction = wordembeddings.DistanceFunction and ((wordembeddings.Word2VecAdd = "true" or wordembeddings.Word2VecAverage = "true")  and  wordembeddings.distancefunction <> "WordEmbDistance" and wordembeddings.synonyms = "false" and wordembeddings.germanetfunction = "false"))
+	left outer join delta both on (both.ClusterAlgorithm = baseline.ClusterAlgorithm and baseline.DistanceFunction = both.DistanceFunction and ((both.Word2VecAdd = "true" or both.Word2VecAverage = "true")  and  both.distancefunction <> "WordEmbDistance" and  (both.synonyms = "true" or both.germanetfunction = "true") ))
+	where baseline.Germanetfunction = "false" and baseline.Synonyms = "false" and baseline.Word2VecAdd = "false" and baseline.Word2VecAverage = "false"  and  baseline.distancefunction <> "WordEmbDistance"
+	
+	group by baseline.ClusterAlgorithm
+	order by (both.SilhouetteAvg) desc
+	)
 		
+
+
+### alpha
+
+Cluster Algorithm | SilhouetteAvg | Ontologies SilhouetteAvg impact | Wordembeddings SilhouetteAvg impact | both SilhouetteAvg impact
+---|---|---|---|---
+KMeans220|0.1862|136.63 %|387.76 %|387.86 %
+FuzzyCMeans1120|0.0647|368.32 %|-49.61 %|1113.91 %
+FuzzyCMeans1220|0.0585|386.32 %|-48.21 %|1233.85 %
+FuzzyCMeans1320|0.0584|394.52 %|-50.0 %|1215.24 %
+FuzzyCMeans1420|0.0573|393.19 %|-54.28 %|1234.03 %
+FuzzyCMeans1020|0.0703|367.71 %|-47.08 %|987.2 %
+FuzzyCMeans1520|0.0601|338.77 %|-56.91 %|1161.9 %
+FuzzyCMeans820|0.0658|337.99 %|-38.3 %|1029.79 %
+FuzzyCMeans1620|0.062|324.52 %|-56.45 %|1089.68 %
+FuzzyCMeans920|0.0675|353.33 %|-45.33 %|992.59 %
+KMeans1020|0.2265|97.35 %|-41.9 %|224.55 %
+KMeans920|0.2209|98.82 %|-38.48 %|232.46 %
+KMeans1120|0.2317|94.86 %|-45.36 %|216.44 %
+FuzzyCMeans1720|0.0651|302.0 %|-65.13 %|1020.58 %
+KMeans1220|0.2322|93.8 %|-45.69 %|213.91 %
+KMeans1320|0.2325|93.76 %|-46.8 %|213.2 %
+KMeans820|0.2181|98.58 %|-35.12 %|232.87 %
+KMeans1420|0.2337|92.73 %|-46.85 %|210.27 %
+KMeans1520|0.2362|88.78 %|-46.23 %|204.66 %
+KMeans1620|0.2392|84.36 %|-46.99 %|199.58 %
+KMeans1720|0.2417|80.39 %|-47.33 %|195.82 %
+KMeans720|0.2121|96.37 %|-25.08 %|236.16 %
+FuzzyCMeans720|0.0653|366.92 %|-33.23 %|984.99 %
+KMeans1820|0.2434|77.32 %|-46.88 %|190.63 %
+FuzzyCMeans1820|0.0762|215.22 %|-73.75 %|826.77 %
+FuzzyCMeans1920|0.0799|195.87 %|-74.47 %|783.48 %
+KMeans1920|0.2437|75.13 %|-46.2 %|189.17 %
+KMeans2020|0.2414|75.85 %|-45.82 %|190.18 %
+KMeans2120|0.2431|72.56 %|-45.37 %|187.7 %
+FuzzyCMeans2020|0.0815|183.68 %|-75.83 %|755.83 %
+KMeans2220|0.245|70.0 %|-45.51 %|184.37 %
+KMeans2320|0.2455|68.88 %|-45.38 %|180.65 %
+KMeans620|0.1967|104.68 %|-5.95 %|248.45 %
+KMeans2420|0.2467|68.54 %|-44.35 %|176.85 %
+KMeans2520|0.2482|64.71 %|-43.92 %|174.01 %
+FuzzyCMeans2120|0.0824|165.9 %|-77.31 %|724.88 %
+FuzzyCMeans2220|0.0825|160.48 %|-77.58 %|721.45 %
+FuzzyCMeans620|0.0676|335.8 %|-38.17 %|894.23 %
+KMeans2620|0.2461|64.61 %|-42.5 %|173.02 %
+FuzzyCMeans2320|0.0844|142.89 %|-79.74 %|688.63 %
+KMeans2720|0.2486|62.03 %|-42.12 %|165.73 %
+KMeans2820|0.2489|61.43 %|-41.58 %|163.8 %
+FuzzyCMeans2420|0.0812|151.23 %|-77.59 %|706.53 %
+KMeans2920|0.2497|59.79 %|-40.49 %|159.79 %
+KMeans3020|0.2515|57.3 %|-41.03 %|156.9 %
+FuzzyCMeans2520|0.0816|145.1 %|-74.75 %|689.58 %
+FuzzyCMeans2620|0.0787|144.98 %|-71.66 %|716.77 %
+KMeans520|0.1856|109.48 %|19.56 %|244.56 %
+FuzzyCMeans2720|0.0792|139.65 %|-71.34 %|692.8 %
+FuzzyCMeans2820|0.081|125.56 %|-69.51 %|668.15 %
+FuzzyCMeans520|0.0536|432.09 %|-9.89 %|1047.57 %
+FuzzyCMeans2920|0.0782|126.09 %|-64.19 %|681.2 %
+KMeans420|0.1905|98.53 %|52.49 %|219.48 %
+FuzzyCMeans3020|0.0788|120.18 %|-64.59 %|657.11 %
+FuzzyCMeans220|0.0514|751.17 %|207.39 %|1002.33 %
+KMeans320|0.1731|121.09 %|149.74 %|226.46 %
+FuzzyCMeans420|0.0446|486.32 %|6.05 %|1134.75 %
+Neural Gas|0.2546|69.6 %|-32.25 %|114.06 %
+FuzzyCMeans320|0.0426|595.31 %|-39.44 %|1169.01 %
+ClusterART|0.2134|-1.78 %|NULL|NULL
+
+
+
+### beta
+
+Cluster Algorithm | SilhouetteAvg | Ontologies SilhouetteAvg impact | Wordembeddings SilhouetteAvg impact | both SilhouetteAvg impact
+---|---|---|---|---
+KMeans1420|0.1642|178.68 %|-38.67 %|315.29 %
+KMeans1320|0.1606|187.86 %|-41.41 %|323.04 %
+KMeans1520|0.1693|168.75 %|-38.98 %|300.53 %
+KMeans1220|0.1591|192.83 %|-42.11 %|324.95 %
+KMeans1120|0.1586|192.24 %|-42.31 %|323.77 %
+KMeans1620|0.1729|159.57 %|-39.04 %|288.43 %
+KMeans1720|0.176|152.56 %|-37.61 %|278.58 %
+KMeans1020|0.1536|201.56 %|-43.55 %|333.72 %
+KMeans1820|0.1784|145.85 %|-38.17 %|269.84 %
+FuzzyCMeans1520|0.0475|526.32 %|-53.68 %|1280.84 %
+KMeans1920|0.1792|144.81 %|-36.77 %|263.84 %
+FuzzyCMeans1420|0.049|518.37 %|-52.04 %|1228.37 %
+KMeans920|0.1496|207.02 %|-46.19 %|335.09 %
+FuzzyCMeans1620|0.0371|670.08 %|-44.47 %|1647.17 %
+KMeans2020|0.1807|142.39 %|-33.48 %|257.39 %
+FuzzyCMeans1320|0.0514|517.9 %|-50.58 %|1151.95 %
+FuzzyCMeans1720|0.0292|849.32 %|-33.56 %|2089.04 %
+FuzzyCMeans1220|0.0513|504.87 %|-43.66 %|1140.16 %
+KMeans2120|0.1812|139.46 %|-31.4 %|250.83 %
+KMeans820|0.1382|226.63 %|-45.95 %|356.66 %
+FuzzyCMeans1820|0.0221|1118.55 %|-17.19 %|2749.32 %
+KMeans2220|0.1834|132.88 %|-30.48 %|242.31 %
+KMeans2320|0.1877|124.99 %|-30.85 %|229.83 %
+FuzzyCMeans1920|0.0156|1602.56 %|10.9 %|3842.31 %
+FuzzyCMeans920|0.0397|811.84 %|96.47 %|1448.87 %
+FuzzyCMeans720|0.0463|678.83 %|138.44 %|1223.33 %
+KMeans720|0.1313|231.38 %|-50.27 %|365.88 %
+FuzzyCMeans2020|0.0137|1724.09 %|20.44 %|4334.31 %
+KMeans2420|0.1883|120.76 %|-30.01 %|222.41 %
+FuzzyCMeans1020|0.0432|680.79 %|24.07 %|1303.47 %
+FuzzyCMeans1120|0.0484|589.88 %|-16.94 %|1151.45 %
+FuzzyCMeans620|0.0552|555.25 %|119.38 %|997.28 %
+KMeans2520|0.1929|114.1 %|-32.04 %|211.51 %
+FuzzyCMeans820|0.0379|891.03 %|173.09 %|1484.17 %
+FuzzyCMeans2120|0.014|1675.0 %|12.14 %|4149.29 %
+KMeans2620|0.1945|110.08 %|-31.72 %|203.75 %
+KMeans620|0.1316|215.5 %|-56.84 %|345.9 %
+KMeans2720|0.1956|106.6 %|-31.03 %|199.03 %
+FuzzyCMeans2220|0.0153|1478.43 %|-1.96 %|3698.04 %
+FuzzyCMeans220|0.0911|458.07 %|84.52 %|535.57 %
+KMeans2820|0.196|104.59 %|-29.49 %|195.15 %
+FuzzyCMeans2320|0.0175|1232.0 %|-18.29 %|3193.14 %
+KMeans2920|0.1962|103.36 %|-28.08 %|191.03 %
+KMeans220|0.1459|249.97 %|82.8 %|291.3 %
+KMeans520|0.1315|200.53 %|-60.15 %|333.61 %
+KMeans3020|0.1965|101.83 %|-27.18 %|187.74 %
+FuzzyCMeans2420|0.0187|1122.46 %|-26.74 %|2894.12 %
+Neural Gas|0.1722|195.24 %|1.86 %|224.51 %
+FuzzyCMeans2520|0.0203|981.28 %|-34.98 %|2627.59 %
+KMeans320|0.1284|210.9 %|24.07 %|330.92 %
+FuzzyCMeans2620|0.0208|913.94 %|-38.94 %|2540.38 %
+KMeans420|0.1267|203.39 %|-39.15 %|332.28 %
+FuzzyCMeans320|0.0738|386.31 %|50.0 %|624.39 %
+FuzzyCMeans520|0.0657|419.18 %|67.58 %|710.2 %
+FuzzyCMeans2720|0.0205|909.27 %|-40.49 %|2494.63 %
+FuzzyCMeans420|0.0801|312.73 %|2.87 %|554.56 %
+FuzzyCMeans2820|0.0201|900.0 %|-41.29 %|2475.62 %
+FuzzyCMeans2920|0.0198|894.44 %|-32.83 %|2447.47 %
+FuzzyCMeans3020|0.0205|852.2 %|-25.37 %|2346.83 %
+ClusterART|0.2176|-0.97 %|NULL|NULL
+
+
+
+### gamma
+
+Cluster Algorithm | SilhouetteAvg | Ontologies SilhouetteAvg impact | Wordembeddings SilhouetteAvg impact | both SilhouetteAvg impact
+---|---|---|---|---
+KMeans1220|0.2466|77.13 %|-40.67 %|188.0 %
+KMeans1020|0.2385|83.1 %|-41.47 %|196.9 %
+KMeans1320|0.2493|76.61 %|-38.31 %|183.71 %
+KMeans1120|0.2405|81.29 %|-40.04 %|193.26 %
+KMeans1420|0.2525|72.95 %|-38.26 %|178.77 %
+KMeans920|0.2316|90.41 %|-42.92 %|203.8 %
+KMeans1520|0.2551|69.46 %|-37.83 %|173.74 %
+KMeans820|0.232|86.42 %|-48.88 %|199.87 %
+KMeans1620|0.256|67.7 %|-36.68 %|170.27 %
+KMeans1720|0.2552|67.48 %|-35.34 %|168.14 %
+KMeans1820|0.2589|64.04 %|-35.53 %|163.69 %
+FuzzyCMeans1720|0.1044|148.08 %|-67.53 %|551.25 %
+FuzzyCMeans1620|0.104|148.65 %|-70.1 %|553.37 %
+KMeans720|0.2303|84.46 %|-52.71 %|194.57 %
+KMeans1920|0.2555|64.27 %|-33.31 %|164.38 %
+FuzzyCMeans620|0.1135|203.61 %|-35.07 %|491.54 %
+FuzzyCMeans1520|0.1016|160.73 %|-73.33 %|560.14 %
+FuzzyCMeans1920|0.101|146.83 %|-59.7 %|560.4 %
+KMeans2020|0.2556|62.52 %|-31.81 %|160.37 %
+FuzzyCMeans1820|0.1016|153.05 %|-62.6 %|553.44 %
+FuzzyCMeans1320|0.1019|161.63 %|-64.08 %|547.69 %
+KMeans2120|0.254|62.28 %|-30.24 %|159.72 %
+FuzzyCMeans1420|0.1016|158.76 %|-70.18 %|548.92 %
+KMeans620|0.2225|86.79 %|-54.43 %|195.91 %
+KMeans2220|0.2543|61.97 %|-30.55 %|158.32 %
+FuzzyCMeans2020|0.0979|144.43 %|-56.08 %|565.47 %
+KMeans2320|0.2556|59.62 %|-29.77 %|154.77 %
+KMeans2420|0.2559|58.58 %|-29.0 %|153.85 %
+FuzzyCMeans1220|0.0961|195.32 %|-60.04 %|573.05 %
+FuzzyCMeans820|0.0981|199.08 %|-28.64 %|557.8 %
+KMeans2520|0.2572|57.0 %|-28.3 %|149.26 %
+FuzzyCMeans1020|0.0881|242.45 %|-49.6 %|625.77 %
+FuzzyCMeans2120|0.0939|147.6 %|-50.8 %|580.72 %
+KMeans2620|0.2564|56.75 %|-27.65 %|149.02 %
+KMeans520|0.2134|87.63 %|-57.78 %|198.31 %
+KMeans2720|0.2567|55.08 %|-26.61 %|146.9 %
+FuzzyCMeans2220|0.0898|149.0 %|-44.21 %|602.9 %
+FuzzyCMeans2320|0.0908|138.44 %|-38.88 %|595.15 %
+KMeans2820|0.2529|55.83 %|-24.48 %|148.52 %
+FuzzyCMeans1120|0.0955|213.82 %|-56.13 %|555.39 %
+FuzzyCMeans520|0.1204|201.99 %|-39.45 %|419.77 %
+FuzzyCMeans2420|0.0876|136.76 %|-33.45 %|613.81 %
+KMeans2920|0.255|54.16 %|-25.1 %|144.94 %
+FuzzyCMeans920|0.0816|263.97 %|-33.46 %|665.07 %
+FuzzyCMeans2520|0.0857|129.64 %|-31.97 %|624.97 %
+FuzzyCMeans720|0.1055|207.39 %|-28.63 %|487.87 %
+KMeans3020|0.2539|54.86 %|-24.34 %|143.76 %
+FuzzyCMeans2620|0.0835|142.4 %|-25.99 %|621.8 %
+KMeans420|0.2082|86.98 %|-57.93 %|188.38 %
+KMeans220|0.1724|178.36 %|10.56 %|246.58 %
+KMeans320|0.1962|99.18 %|-56.32 %|203.77 %
+FuzzyCMeans220|0.0923|419.93 %|63.71 %|543.88 %
+FuzzyCMeans2720|0.0797|142.79 %|-23.96 %|645.29 %
+FuzzyCMeans2820|0.081|134.94 %|-21.85 %|624.07 %
+FuzzyCMeans420|0.1291|130.44 %|-41.21 %|350.27 %
+Neural Gas|0.167|187.37 %|97.19 %|245.63 %
+FuzzyCMeans2920|0.0792|121.09 %|-22.98 %|621.09 %
+FuzzyCMeans320|0.1069|212.63 %|-5.33 %|432.93 %
+FuzzyCMeans3020|0.0798|117.54 %|-23.68 %|601.0 %
+ClusterART|0.3186|-12.4 %|NULL|NULL
+
+
+### delta
+
+Cluster Algorithm | SilhouetteAvg | Ontologies SilhouetteAvg impact | Wordembeddings SilhouetteAvg impact | both SilhouetteAvg impact
+---|---|---|---|---
+FuzzyCMeans1620|0.1064|139.57 %|-78.67 %|576.22 %
+FuzzyCMeans1520|0.1016|158.37 %|-73.52 %|606.79 %
+FuzzyCMeans1320|0.0965|190.67 %|-60.0 %|642.9 %
+FuzzyCMeans1720|0.1064|143.61 %|-77.82 %|571.9 %
+FuzzyCMeans1420|0.0987|171.33 %|-67.07 %|623.61 %
+KMeans1420|0.2106|122.98 %|-34.33 %|239.03 %
+FuzzyCMeans1220|0.0944|229.98 %|-50.74 %|656.04 %
+KMeans1320|0.2129|118.69 %|-36.92 %|234.29 %
+KMeans1220|0.2092|123.42 %|-39.48 %|239.58 %
+KMeans1620|0.2104|120.29 %|-30.94 %|237.6 %
+KMeans1120|0.2076|122.59 %|-40.03 %|241.96 %
+KMeans1520|0.2119|122.09 %|-33.51 %|234.78 %
+FuzzyCMeans1820|0.104|134.52 %|-76.15 %|582.02 %
+FuzzyCMeans1920|0.1053|122.79 %|-73.88 %|571.13 %
+KMeans1720|0.2127|114.29 %|-29.38 %|231.03 %
+KMeans1020|0.2048|123.63 %|-41.06 %|243.31 %
+KMeans1820|0.2147|110.29 %|-26.92 %|226.6 %
+KMeans1920|0.2149|108.56 %|-25.5 %|225.17 %
+KMeans2020|0.2144|105.08 %|-24.11 %|224.81 %
+FuzzyCMeans2020|0.106|126.32 %|-70.28 %|552.26 %
+KMeans920|0.2065|118.11 %|-42.57 %|234.77 %
+KMeans2120|0.2151|105.39 %|-23.71 %|221.06 %
+FuzzyCMeans2120|0.1062|113.28 %|-67.89 %|546.52 %
+KMeans2220|0.213|104.27 %|-21.31 %|221.64 %
+KMeans2320|0.2126|103.1 %|-19.61 %|219.33 %
+KMeans820|0.1984|120.21 %|-44.0 %|242.04 %
+FuzzyCMeans1120|0.0947|232.31 %|-44.14 %|616.16 %
+KMeans2420|0.2119|100.33 %|-19.54 %|219.82 %
+FuzzyCMeans2220|0.1048|107.16 %|-63.36 %|543.89 %
+FuzzyCMeans1020|0.0897|257.97 %|-43.59 %|651.84 %
+KMeans2520|0.2154|93.92 %|-19.41 %|211.65 %
+KMeans2620|0.2157|92.54 %|-18.5 %|208.62 %
+FuzzyCMeans2320|0.1029|107.58 %|-59.28 %|546.45 %
+KMeans2720|0.2165|90.76 %|-18.11 %|206.74 %
+KMeans2820|0.2166|88.0 %|-17.17 %|204.06 %
+FuzzyCMeans920|0.084|280.36 %|-28.21 %|682.98 %
+KMeans720|0.1928|123.18 %|-49.38 %|240.82 %
+KMeans2920|0.2169|85.57 %|-15.91 %|201.89 %
+FuzzyCMeans620|0.0809|304.7 %|8.9 %|705.69 %
+FuzzyCMeans2420|0.1011|106.23 %|-52.42 %|543.62 %
+KMeans3020|0.2159|83.84 %|-15.38 %|200.79 %
+FuzzyCMeans820|0.079|318.86 %|-18.35 %|721.9 %
+FuzzyCMeans2520|0.1037|102.31 %|-52.65 %|524.59 %
+FuzzyCMeans2620|0.1026|99.42 %|-50.88 %|529.82 %
+FuzzyCMeans2720|0.1022|90.31 %|-51.86 %|527.5 %
+FuzzyCMeans720|0.0746|314.61 %|-6.97 %|757.24 %
+KMeans620|0.1833|124.6 %|-50.25 %|247.95 %
+FuzzyCMeans2820|0.1|91.8 %|-49.0 %|535.9 %
+FuzzyCMeans2920|0.1018|86.84 %|-51.87 %|504.42 %
+KMeans520|0.1752|124.71 %|-48.92 %|245.66 %
+FuzzyCMeans3020|0.1018|78.0 %|-52.55 %|491.06 %
+KMeans220|0.143|233.99 %|45.59 %|317.69 %
+FuzzyCMeans220|0.0914|427.46 %|76.59 %|539.93 %
+Neural Gas|0.3943|27.77 %|-1.75 %|47.81 %
+KMeans420|0.1687|124.78 %|-47.78 %|237.29 %
+KMeans320|0.1559|160.68 %|-40.22 %|254.2 %
+FuzzyCMeans420|0.0979|244.84 %|1.94 %|462.1 %
+FuzzyCMeans320|0.093|263.55 %|-32.04 %|486.13 %
+FuzzyCMeans520|0.0904|276.99 %|3.65 %|476.66 %
+ClusterART|0.2581|68.07 %|NULL|NULL
